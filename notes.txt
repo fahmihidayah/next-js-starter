@@ -1,0 +1,6 @@
+what are materials that I miss?
+1. Middleware 
+2. Csrf 
+3. Expire jwt token -> how to refresh.
+4. Retristric admin or some path.
+5. Deploy to Vercel or railway.
