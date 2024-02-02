@@ -27,7 +27,6 @@ export async function doAction<F, D>(params: BaseActionParams<F>): Promise<FormS
         statusCode : 500,
     };
     try {
-        validationResult
         const response = await params.query(params.params);
         data = response.data as BaseResponse<D>;
         console.log(data)

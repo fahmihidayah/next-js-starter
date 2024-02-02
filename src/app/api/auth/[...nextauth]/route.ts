@@ -3,33 +3,47 @@ import {JWT} from "next-auth/jwt";
 import { Awaitable, NextAuthOptions, Session, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { requestUtil } from "@/libs/network/request";
-// import { post } from "@/lib/api";
-// import { User } from "@/types/user";
+import axiosInstance from "@/libs/network/axios";
+import { BaseResponse } from "@/libs/types/base";
+import { AxiosError } from "axios";
 
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                email: { label: "email", type: "email", placeholder: "jsmith" },
+                email: { label: "email", type: "email", placeholder: "" },
                 password: { label: "email", type: "password" }
             },
             async authorize(credentials, req) : Promise<User> {
                 console.log(credentials);
                 // Add logic here to look up the user from the credentials supplied
-                const response = await requestUtil.post("/auth/sign-in", {
-                    email : credentials?.email,
-                    password : credentials?.password
-                });
-
-                if(response.statusCode !== 200) {
-                    throw new Error(response.message);
+                try {
+                    const response = await axiosInstance.post("/auth/sign-in", {
+                        email : credentials?.email,
+                        password : credentials?.password
+                    })
+                    console.log(response.data);
+    
+                    const dataResponse = response.data as BaseResponse<User>;
+    
+                    if(dataResponse.statusCode !== 200) {
+                        throw new Error(dataResponse.message);
+                    }
+    
+                    const responseUser = response.data as BaseResponse<User>;
+                    console.log('Next auth : authorize : ', responseUser);
+    
+                    return responseUser.data as User;
                 }
-
-                const user = response.data as User;
-                // console.log('Next auth : authorize : ', user);
-
-                return user;
+                catch(error) {
+                    console.log(error);
+                    if(error instanceof AxiosError) {
+                        throw new Error(error.message);
+                    }
+                    throw new Error("Unknown Error");
+                    
+                }
                 
               }
         })
@@ -50,14 +64,14 @@ export const authOptions: NextAuthOptions = {
         async session({token, user, session}) : Promise<Session> {
             session.user = token.userPayload;
             session.token = token.userPayload.token;
-            // console.log('Next auth - session : ', session.user, session.token);
+            // console.log('Next auth - session : ', token.userPayload);
             return session
         }
     },
     secret: "Test123Test123",
     debug : process.env.NODE_ENV === 'development',
     pages : {
-      signIn : "auth/login",
+      signIn : "/auth/login",
     }
 }
 

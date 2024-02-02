@@ -1,5 +1,6 @@
 import { Box, BoxProps, CloseButton, Flex, FlexProps, Icon, Text, useColorModeValue } from "@chakra-ui/react";
 import { SidebarItem } from ".";
+import Link from "next/link";
 
 export interface SidebarContentProps extends BoxProps {
     onClose: () => void;
@@ -20,10 +21,10 @@ export default function SidebarContent({ onClose, items, ...rest }: SidebarConte
                     Logo
                 </Text>
                 <CloseButton onClick={onClose} display={{
-                    sm : "flex",
-                    md : "none",
-                    xl : "none",
-                    base : "none"
+                    sm: "flex",
+                    md: "none",
+                    xl: "none",
+                    base: "none"
                 }} />
             </Flex>
             {items.map((item) => (
@@ -40,33 +41,35 @@ interface NavItemProps extends FlexProps {
 }
 const NavItem = ({ item, ...rest }: NavItemProps) => {
     return (
-        <Box
-            style={{ textDecoration: 'none' }}
-            _focus={{ boxShadow: 'none' }}>
-            <Flex
-                align="center"
-                p="4"
-                mx="4"
-                borderRadius="lg"
-                role="group"
-                cursor="pointer"
-                _hover={{
-                    bg: 'blue.400',
-                    color: 'white',
-                }}
-                {...rest}>
-                {item.icon && (
-                    <Icon
-                        mr="4"
-                        fontSize="16"
-                        _groupHover={{
-                            color: 'white',
-                        }}
-                        as={item.icon}
-                    />
-                )}
-                <Text>{item.name}</Text>
-            </Flex>
-        </Box>
+        <Link href={item.action ?? "#"}>
+            <Box
+                style={{ textDecoration: 'none' }}
+                _focus={{ boxShadow: 'none' }}>
+                <Flex
+                    align="center"
+                    p="4"
+                    mx="4"
+                    borderRadius="lg"
+                    role="group"
+                    cursor="pointer"
+                    _hover={{
+                        bg: 'blue.400',
+                        color: 'white',
+                    }}
+                    {...rest}>
+                    {item.icon && (
+                        <Icon
+                            mr="4"
+                            fontSize="16"
+                            _groupHover={{
+                                color: 'white',
+                            }}
+                            as={item.icon}
+                        />
+                    )}
+                    <Text>{item.name}</Text>
+                </Flex>
+            </Box>
+        </Link>
     )
 }

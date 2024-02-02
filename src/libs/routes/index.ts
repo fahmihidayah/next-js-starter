@@ -1,3 +1,4 @@
+import { adminPathUtils } from "./admin"
 import { authPathUtils } from "./auth"
 
 export const routePathUtils = {
@@ -6,6 +7,10 @@ export const routePathUtils = {
     },
     
     auth: () => {
-        return authPathUtils
+        return authPathUtils;
+    },
+
+    admin: () => {
+        return adminPathUtils;
     }
 }

@@ -1,9 +1,11 @@
 'use client'
 import InputField from "@/components/form/InputField";
-import { Button, Checkbox, Flex, Text } from "@chakra-ui/react";
-import { signIn } from "next-auth/react";
+import { Button, Checkbox, Flex, Text, useToast } from "@chakra-ui/react";
+import { SignInResponse, signIn } from "next-auth/react";
 import { FormEventHandler, useState } from "react";
 import { LoginFormData } from "./type";
+import { redirect } from "next/navigation";
+import ErrorText from "@/components/form/ErrorText";
 
 export default function LoginForm() {
 
@@ -13,19 +15,28 @@ export default function LoginForm() {
         isRememberMe: false
     })
 
+    const [errorMessage, setErrorMessage] = useState<string | undefined>();
+
     const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
         const result = await signIn("credentials", {
             email: loginForm.email,
             password: loginForm.password,
             redirect: true,
-            callbackUrl: "/admin"
+            callbackUrl: "",
 
+        }).catch((signInResponse? : SignInResponse) => {
+            if(signInResponse?.error) {
+                setErrorMessage(signInResponse?.error?.toString())
+            }
         })
 
     }
 
     return <form method="post" onSubmit={onSubmit}>
+        <ErrorText isVisible={errorMessage !== undefined}>
+            {errorMessage}
+        </ErrorText>
         <InputField label="Email" name="email" inputType="email" onChangeValue={e => {
             setLoginForm({
                 ...loginForm,

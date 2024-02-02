@@ -1,3 +1,5 @@
+import axiosInstance from "./axios"
+
 export const requestUtil = {
 
     get : async () : Promise<void> => {
@@ -5,8 +7,7 @@ export const requestUtil = {
     },
 
     post : async (url : string, data : any) : Promise<any> => {
-
-        process.env.API_URL
+        
 
     },
 
