@@ -1,34 +1,25 @@
+'use server'
 import { ZodType } from "zod";
 import { BaseResponse, FormState } from "../types/base";
 import { AxiosError } from "axios";
 import { redirect } from "next/navigation";
 
-interface BaseActionParams<F> {
+export interface BaseActionParams<F> {
     params: F;
-    validationScheme?: ZodType;
     redirect?: string;
-    query: (params : F) => Promise<any>;
+    query?: (params : F) => Promise<any>;
 }
 
-export async function doAction<F, D>(params: BaseActionParams<F>): Promise<FormState<D>> {
-    const validationResult = params.validationScheme?.safeParse(params.params)
+export async function doAction<F>(params: BaseActionParams<F>): Promise<FormState> {
+    
 
-    if (params.validationScheme) {
-        if (!validationResult?.success) {
-            return {
-                isError: true,
-                fieldErrors: validationResult?.error.flatten().fieldErrors,
-            }
-        }
-    }
-
-    let data : BaseResponse<D> = {
+    let data : BaseResponse<any> = {
         message : "query not execute",
         statusCode : 500,
     };
     try {
-        const response = await params.query(params.params);
-        data = response.data as BaseResponse<D>;
+        const response = await params.query?.(params.params);
+        data = response.data as BaseResponse<any>;
         console.log(data)
     }
 

@@ -1,16 +1,15 @@
-import { Box, BoxProps } from "@chakra-ui/react";
+import { Box, BoxProps, Text } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 export interface ErrorTextProps extends BoxProps{
-    isVisible : boolean;
-    children : ReactNode;
+    isVisible? : boolean;
+    message? : string;
 }
 
-export default function ErrorText({children, isVisible, ... rest} : ErrorTextProps) {
+export default function ErrorText({children, isVisible, message, ... rest} : ErrorTextProps) {
     return (
-        <Box display={isVisible ? "flex" : "none"} rounded={"md"} bg={"red.200"} p={5} {... rest}>
-            {children}
+        <Box display={message ? "flex" : "none"} rounded={"md"} bg={"red.200"} p={5} {... rest}>
+            <Text>{message}</Text>
         </Box>
     )
-
 }

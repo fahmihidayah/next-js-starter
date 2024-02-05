@@ -5,8 +5,8 @@ export interface BaseResponse<T> {
 }
 
 
-export interface FormState<D> {
-    data?: D;
+export interface FormState {
+    data?: any;
     message? : string;
     isError? : boolean;
     fieldErrors? : any;

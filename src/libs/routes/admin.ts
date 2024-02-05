@@ -6,8 +6,12 @@ export const adminPathUtils = {
         return `${BASE_PATH}`;
     },
     
-    categories : () => {
+    categories : (path? : string) => {
+        if(path) {
+            return `${BASE_PATH}categories/${path}`;
+        }
         return `${BASE_PATH}categories`;
+        
     }, 
 
     posts : () => {

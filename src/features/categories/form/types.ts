@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export interface CategoryFormData {
+    id? : number;
     name : string;
     description : string;
 }
