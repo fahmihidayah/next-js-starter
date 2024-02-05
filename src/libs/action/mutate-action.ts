@@ -6,7 +6,7 @@ import { BaseActionParams, doAction } from ".";
 import { FormState } from "../types/base";
 
 interface RequestActionParams<F> {
-    params: F;
+    params?: F;
     redirect?: string;
     basePath: string;
     id?: any;
@@ -18,14 +18,27 @@ export async function doMutateAction<F>(params: RequestActionParams<F>): Promise
     const method = params.method;
     const session = await getServerSession(authOptions);
     return await doAction({
-        params : params.params,
-        redirect : params.redirect,
-        query: async (successParams: any) => {
-            return await axiosInstance[method](url, successParams, {
-                headers: {
-                    "Authorization": "Bearer " + session?.token?.accessToken
-                },
-            },);
+        params: params.params,
+        redirect: params.redirect,
+        query: async (successParams?: any) => {
+            if (successParams) {
+                const response = await axiosInstance[method](url, successParams, {
+                    headers: {
+                        "Authorization": "Bearer " + session?.token?.accessToken
+                    },
+                },);
+                console.log('fahmi', response);
+                return response;
+            }
+            else {
+                const response = await axiosInstance[method](url, {
+                    headers: {
+                        "Authorization": "Bearer " + session?.token?.accessToken
+                    },
+                },);
+                console.log('fahmi', response);
+                return response;
+            }
         }
     })
 }

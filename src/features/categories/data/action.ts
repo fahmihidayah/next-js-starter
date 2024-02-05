@@ -1,4 +1,4 @@
-'use server'
+'use client'
 import { Category } from "@/libs/types/category";
 import { BaseResponse, FormState } from "@/libs/types/base";
 import { doAction } from "@/libs/action";
@@ -11,7 +11,17 @@ import { CategoryFormData, categoryValidationSchema } from "./types";
 import validate from "@/libs/validation-helper";
 import { doMutateAction } from "@/libs/action/mutate-action";
 
-export async function saveCategoryAction(params: CategoryFormData) : Promise<FormState> {
+export async function deleteCategory(params? : Category) : Promise<FormState> {
+    console.log(params);
+    return await doMutateAction({
+        basePath : "categories",
+        method : "delete",
+        id : params?.id,
+        redirect : routePathUtils.admin().categories(),
+    })
+}
+
+export async function categoryAction(params: CategoryFormData) : Promise<FormState> {
     const formStateResult = validate({
         form : params,
         validationScheme : categoryValidationSchema
@@ -22,7 +32,7 @@ export async function saveCategoryAction(params: CategoryFormData) : Promise<For
     }
 
     return await doMutateAction({
-        basePath : "/categories",
+        basePath : "categories",
         method : params.id ? "patch" : "post",
         params : params,
         id : params.id,

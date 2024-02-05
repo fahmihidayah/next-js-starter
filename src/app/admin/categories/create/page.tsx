@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import CategoryForm from "@/features/categories/form/CategoryForm";
-import { categoryValidationSchema } from "@/features/categories/form/types";
+import { categoryValidationSchema } from "@/features/categories/data/types";
 import { Card, CardBody, Container } from "@chakra-ui/react";
 import jsonSchemaToZod, { JsonSchema } from "json-schema-to-zod";
 import { getServerSession } from "next-auth";
@@ -10,12 +10,6 @@ import { z } from "zod";
 
 
 export default async function CreateCategory() {
-    
-    const session = await getServerSession(authOptions);
-    // const jsonValidation  = zodToJsonSchema(categoryValidationSchema, ) as JsonSchema;
-    // const zodResult = eval(jsonSchemaToZod(jsonValidation, { module: "esm" }));
-    // console.log('json zod', jsonValidation);
-    // console.log('zod', zodResult);
     return <Container maxW={"auto"}>
         <Card mt={5}>
             <CardBody>

@@ -1,5 +1,6 @@
 import SimpleTable from "@/components/table/SimpleTable"
 import CategoryTable from "@/features/categories/table/CategoryTable";
+import { query } from "@/libs/action/query";
 import axiosInstance from "@/libs/network/axios";
 import { routePathUtils } from "@/libs/routes";
 import { BaseResponse } from "@/libs/types/base";
@@ -21,9 +22,7 @@ interface ListCategoriesProps {
 }
 
 export default async function ListCategories({ }: ListCategoriesProps) {
-    const response = await axiosInstance.get("/categories");
-
-    const categoriesResponse = response.data as BaseResponse<Category[]>
+    const response = await query<Category[]>({baseUrl : "/categories"})
 
     return <Container maxW={"auto"} mt={5}>
         <Card>
@@ -36,7 +35,7 @@ export default async function ListCategories({ }: ListCategoriesProps) {
                         <Button size={"sm"} colorScheme="blue">Create</Button>
                     </Link>
                 </Flex>
-                <CategoryTable data={categoriesResponse.data ?? []}></CategoryTable>
+                <CategoryTable data={response.data ?? []}></CategoryTable>
 
             </CardBody>
         </Card>

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ChangeValueEvent } from "../InputField"
+import { ChangeValueEvent } from "../../../components/form/InputField"
 
 interface UseFormParams {
     defaultValue : any

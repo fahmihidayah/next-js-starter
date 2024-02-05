@@ -11,8 +11,6 @@ export interface BaseActionParams<F> {
 }
 
 export async function doAction<F>(params: BaseActionParams<F>): Promise<FormState> {
-    
-
     let data : BaseResponse<any> = {
         message : "query not execute",
         statusCode : 500,
@@ -20,9 +18,7 @@ export async function doAction<F>(params: BaseActionParams<F>): Promise<FormStat
     try {
         const response = await params.query?.(params.params);
         data = response.data as BaseResponse<any>;
-        console.log(data)
     }
-
     catch (error) {
         if (error instanceof AxiosError) {
             return {

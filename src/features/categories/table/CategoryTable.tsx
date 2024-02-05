@@ -7,15 +7,6 @@ import Link from "next/link"
 import { useMemo } from "react"
 import { FiEdit, FiEye, FiTrash } from "react-icons/fi"
 
-interface CategoryColumn {
-    id: string
-    name: string
-    description: string
-    createdAt: string
-    updatedAt: string
-    action: string
-}
-
 export interface CategoryTableProps {
     data : Category[];
 }
@@ -56,9 +47,10 @@ export default function CategoryTable({data} : CategoryTableProps) {
                     <Link href={"categories/" + info.getValue<Category>().id}>
                         <Button colorScheme="green" size={"sm"} me={"3px"}><FiEye></FiEye></Button>
                     </Link>
-                    <Button colorScheme="red" size={"sm"} me={"3px"} onClick={() => {
-
-                    }}> <FiTrash></FiTrash></Button>
+                    <Link href={"categories/" + info.getValue<Category>().id + "/delete"} >
+                    <Button colorScheme="red" size={"sm"} me={"3px"} > <FiTrash></FiTrash></Button>
+                    </Link>
+                  
                 </>
             }
         ], []
