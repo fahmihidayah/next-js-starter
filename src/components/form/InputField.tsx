@@ -17,7 +17,7 @@ interface InputFieldProps extends BoxProps {
     inputAs?: "textarea" | undefined;
     options?: OptionItem[];
     selectedOption?: OptionItem;
-    error? : string,
+    error?: string,
     onChangeValue?: (event: ChangeValueEvent) => void;
 }
 
@@ -25,22 +25,23 @@ export default function InputField({ name, label, inputType, value, inputAs, hei
 
     const [inputValue, setInputValue] = useState(value);
 
-
-
     return <Box {...rest}>
         <FormLabel>{label}</FormLabel>
         {
             options ?
-                <Select name={name} placeholder="Select option" onChange={e => {
+                <Select name={name} placeholder="Select option" value={inputValue} onChange={e => {
                     onChangeValue?.(e)
+                    setInputValue(
+                        e.target.value
+                    );
                 }}>
                     {
                         options.map(e => <option key={e.value} value={e.value}>{e.label}</option>)
                     }
 
-                isInvalid={error !== undefined}
+                    isInvalid={error !== undefined}
                 </Select>
-            :
+                :
                 <Input
                     name={name}
                     type={inputType}
@@ -56,8 +57,8 @@ export default function InputField({ name, label, inputType, value, inputAs, hei
                     width={width}
                     isInvalid={error !== undefined}
                 >
-                     </Input>
+                </Input>
         }
-         {error && <Text textColor={"red"}>{error}</Text>}      
+        {error && <Text textColor={"red"}>{error}</Text>}
     </Box>
 }

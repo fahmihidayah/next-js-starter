@@ -41,13 +41,13 @@ export default function PostTable({data} : PostTableProps) {
                 header: "Action",
                 accessorFn: (row) => row,
                 cell: (info) => <>
-                    <Link href={"categories/" + info.getValue<Post>().id + "/edit"} >
+                    <Link href={"posts/" + info.getValue<Post>().id + "/edit"} >
                         <Button colorScheme="blue" size={"sm"} me={"3px"}> <FiEdit></FiEdit></Button>
                     </Link>
-                    <Link href={"categories/" + info.getValue<Post>().id}>
+                    <Link href={"posts/" + info.getValue<Post>().id}>
                         <Button colorScheme="green" size={"sm"} me={"3px"}><FiEye></FiEye></Button>
                     </Link>
-                    <Link href={"categories/" + info.getValue<Post>().id + "/delete"} >
+                    <Link href={"posts/" + info.getValue<Post>().id + "/delete"} >
                     <Button colorScheme="red" size={"sm"} me={"3px"} > <FiTrash></FiTrash></Button>
                     </Link>
                   

@@ -4,11 +4,11 @@ import { doMutateAction } from "@/libs/action/mutate-action";
 import { routePathUtils } from "@/libs/routes";
 import validate from "@/libs/validation-helper";
 
-export async function deletePost(postForm : PostForm) : Promise<FormState>{
+export async function deletePost(post : Post) : Promise<FormState>{
     return await doMutateAction({
         basePath : "posts",
         method : "delete",
-        id : postForm.id,
+        id : post.id,
         redirect : routePathUtils.admin().posts()
     })
 }

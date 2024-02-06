@@ -10,7 +10,7 @@ import ErrorText from "@/components/form/ErrorText";
 import SubmitButton from "@/components/form/SubmitButton";
 
 interface PostFormProps {
-    post?: Post;
+    post?: Post  ;
     categories?: Category[]
 }
 
@@ -34,6 +34,7 @@ export default function PostFormComponent({ post, categories }: PostFormProps) {
             label="Title"
             inputType="text"
             name="title"
+            value={form.title}
             onChangeValue={onChangeValue}
             error={formState.fieldErrors?.title?.join(",")}></InputField>
         <InputField mb={5}
@@ -47,12 +48,14 @@ export default function PostFormComponent({ post, categories }: PostFormProps) {
                 };
             })}
             onChangeValue={onChangeValue}
+            value={`${form.category_id}`}
             error={formState.fieldErrors?.category_id?.join(",")}></InputField>
         <InputField
             height={200}
             mb={5}
             label="Content"
             inputType="text"
+            value={form.content}
             inputAs="textarea"
             name="content"
             onChangeValue={onChangeValue}

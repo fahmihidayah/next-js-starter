@@ -20,7 +20,7 @@ export interface PostForm {
 
 export const postValidationSchema = z.object({
     title: z.string().min(3),
-    category_id : z.string().min(1),
+    category_id : z.string(),
     content: z.string().min(10),
 
 })

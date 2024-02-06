@@ -34,6 +34,5 @@ export async function query<D>(queryParameter: QueryParameter) : Promise<BaseRes
             message : error?.toString() ?? "Unknown error !!",
             statusCode : 511,
         }
-        
     }
 }
