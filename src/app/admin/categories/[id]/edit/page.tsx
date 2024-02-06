@@ -1,8 +1,8 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import CategoryForm from "@/features/categories/form/CategoryForm";
+import { Category } from "@/features/categories/data/types";
+import CategoryFormComponent from "@/features/categories/form/CategoryFormComponent";
 import axiosInstance from "@/libs/network/axios";
 import { BaseResponse } from "@/libs/types/base";
-import { Category } from "@/libs/types/category";
 import { Card, CardBody, Container } from "@chakra-ui/react";
 import { getServerSession } from "next-auth";
 import { z } from "zod";
@@ -21,7 +21,7 @@ export default async function EditCategory({params} : EditCategoryProps) {
     return <Container maxW={"auto"}>
         <Card mt={5}>
             <CardBody>
-                <CategoryForm category={category}></CategoryForm>
+                <CategoryFormComponent category={category}></CategoryFormComponent>
             </CardBody>
         </Card>
     </Container>

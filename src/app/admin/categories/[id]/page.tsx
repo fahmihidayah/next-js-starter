@@ -1,10 +1,10 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import CategoryDetailComponent from "@/features/categories/form/CategoryDetail";
+import { Category } from "@/features/categories/data/types";
+import CategoryDetailComponent from "@/features/categories/form/CategoryDetailComponent";
 import { query } from "@/libs/action/query";
 import axiosInstance from "@/libs/network/axios";
 import { routePathUtils } from "@/libs/routes";
 import { BaseResponse } from "@/libs/types/base";
-import { Category } from "@/libs/types/category";
 import { Button, Card, CardBody, Container, Divider, Flex, Heading, Text } from "@chakra-ui/react";
 import { getServerSession } from "next-auth";
 import Link from "next/link";

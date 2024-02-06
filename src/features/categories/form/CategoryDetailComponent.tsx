@@ -1,7 +1,7 @@
 import { routePathUtils } from "@/libs/routes";
-import { Category } from "@/libs/types/category";
 import { Button, Divider, Flex, Heading, Text } from "@chakra-ui/react";
 import Link from "next/link";
+import { Category } from "../data/types";
 
 interface CategoryDetailProps {
     category?: Category;

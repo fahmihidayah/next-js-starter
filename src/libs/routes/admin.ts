@@ -1,3 +1,5 @@
+import { handleRelativePath } from "./path-utils";
+
 const BASE_PATH = "/admin/"
 
 export const adminPathUtils = {
@@ -7,14 +9,10 @@ export const adminPathUtils = {
     },
     
     categories : (path? : string) => {
-        if(path) {
-            return `${BASE_PATH}categories/${path}`;
-        }
-        return `${BASE_PATH}categories`;
-        
+        return handleRelativePath(`${BASE_PATH}categories`, path);
     }, 
 
-    posts : () => {
-        return `${BASE_PATH}posts`;
+    posts : (path? : string) => {
+        return handleRelativePath(`${BASE_PATH}posts`, path);
     }
 }

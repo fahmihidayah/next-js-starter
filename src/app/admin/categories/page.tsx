@@ -1,10 +1,10 @@
 import SimpleTable from "@/components/table/SimpleTable"
+import { Category } from "@/features/categories/data/types";
 import CategoryTable from "@/features/categories/table/CategoryTable";
 import { query } from "@/libs/action/query";
 import axiosInstance from "@/libs/network/axios";
 import { routePathUtils } from "@/libs/routes";
 import { BaseResponse } from "@/libs/types/base";
-import { Category } from "@/libs/types/category";
 import { Button, Card, CardBody, Container, Flex, Heading } from "@chakra-ui/react"
 import { ColumnDef, Table, getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 import axios from "axios";

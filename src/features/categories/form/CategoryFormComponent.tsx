@@ -6,10 +6,9 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { categoryAction } from "../data/action";
 import { FormState } from "@/libs/types/base";
-import { Category } from "@/libs/types/category";
 import ErrorText from "@/components/form/ErrorText";
 import { ZodType, z, ZodSchema } from "zod";
-import { CategoryFormData, categoryValidationSchema } from "../data/types";
+import { Category, CategoryFormData, categoryValidationSchema } from "../data/types";
 import { doMutateAction } from "@/libs/action/mutate-action";
 import { routePathUtils } from "@/libs/routes";
 import useFormHook from "@/libs/hook/form/useFormHook";
@@ -18,7 +17,7 @@ type CategoryFormProps = {
     category?: Category;
 }
 
-export default function CategoryForm(props: CategoryFormProps) {
+export default function CategoryFormComponent(props: CategoryFormProps) {
 
     const { onChangeValue, form } = useFormHook({
         defaultValue: {

@@ -5,14 +5,14 @@ import { ColumnDef, getCoreRowModel, getFilteredRowModel, getSortedRowModel, use
 import Link from "next/link"
 import { useMemo } from "react"
 import { FiEdit, FiEye, FiTrash } from "react-icons/fi"
-import { Category } from "../data/types"
+import { Post } from "../data/types"
 
-export interface CategoryTableProps {
-    data : Category[];
+export interface PostTableProps {
+    data : Post[];
 }
 
-export default function CategoryTable({data} : CategoryTableProps) {
-    const columns: ColumnDef<Category>[] = useMemo<ColumnDef<Category>[]>(
+export default function PostTable({data} : PostTableProps) {
+    const columns: ColumnDef<Post>[] = useMemo<ColumnDef<Post>[]>(
         () => [
             {
                 id: "id",
@@ -21,18 +21,18 @@ export default function CategoryTable({data} : CategoryTableProps) {
                 cell: (info) => info.getValue()
             },
             {
-                id: "name",
-                header: "Name",
+                id: "title",
+                header: "Title",
                 enableColumnFilter: true,
                 enableSorting: true,
-                accessorFn: (row) => row.name,
+                accessorFn: (row) => row.title,
                 cell: (info) => info.getValue()
             }, {
-                id: "description",
-                header: "Description",
+                id: "content",
+                header: "Content",
                 enableColumnFilter: true,
                 enableSorting: true,
-                accessorFn: (row) => row.description,
+                accessorFn: (row) => (row.content.length > 50 ? `${row.content.substring(9, 50)}...` : row.content),
                 cell: (info) => info.getValue()
             },
 
@@ -41,13 +41,13 @@ export default function CategoryTable({data} : CategoryTableProps) {
                 header: "Action",
                 accessorFn: (row) => row,
                 cell: (info) => <>
-                    <Link href={"categories/" + info.getValue<Category>().id + "/edit"} >
+                    <Link href={"categories/" + info.getValue<Post>().id + "/edit"} >
                         <Button colorScheme="blue" size={"sm"} me={"3px"}> <FiEdit></FiEdit></Button>
                     </Link>
-                    <Link href={"categories/" + info.getValue<Category>().id}>
+                    <Link href={"categories/" + info.getValue<Post>().id}>
                         <Button colorScheme="green" size={"sm"} me={"3px"}><FiEye></FiEye></Button>
                     </Link>
-                    <Link href={"categories/" + info.getValue<Category>().id + "/delete"} >
+                    <Link href={"categories/" + info.getValue<Post>().id + "/delete"} >
                     <Button colorScheme="red" size={"sm"} me={"3px"} > <FiTrash></FiTrash></Button>
                     </Link>
                   

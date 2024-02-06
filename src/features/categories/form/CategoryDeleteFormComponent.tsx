@@ -1,19 +1,19 @@
 'use client'
 import ErrorText from "@/components/form/ErrorText";
-import { Category } from "@/libs/types/category";
 import { Button, Card, CardBody, Container, Flex, Link, Text } from "@chakra-ui/react";
 import { useFormState } from "react-dom";
 import { deleteCategory } from "../data/action";
 import { FormState } from "@/libs/types/base";
 import SubmitButton from "@/components/form/SubmitButton";
-import CategoryDetailComponent from "./CategoryDetail";
+import CategoryDetailComponent from "./CategoryDetailComponent";
 import useFormHook from "@/libs/hook/form/useFormHook";
+import { Category } from "../data/types";
 
 interface DeleteFormProps {
     category?: Category;
 }
 
-export default function CategoryDeleteForm({ category }: DeleteFormProps) {
+export default function CategoryDeleteFormComponent({ category }: DeleteFormProps) {
 
     const formHook = useFormHook({
         defaultValue : category
