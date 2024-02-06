@@ -23,7 +23,6 @@ export default async function PostDeletePage({params} : PostDeletePageProps) {
         baseUrl : "posts",
         id : params.id
     })
-
     
     return <ContainerCard>
         <PostDeleteFormComponent post={postResponse.data!!} ></PostDeleteFormComponent>

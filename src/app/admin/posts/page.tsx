@@ -18,9 +18,8 @@ interface ListPostsProps {
 export default async function ListPosts({ params }: ListPostsProps) {
 
     const response = await query<Post[]>({
-        baseUrl : "posts"
+        baseUrl: "posts"
     });
-
 
     return <ContainerCard>
         <>

@@ -1,4 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import ContainerCard from "@/components/admin/Container-Card";
 import { Category } from "@/features/categories/data/types";
 import CategoryFormComponent from "@/features/categories/form/CategoryFormComponent";
 import axiosInstance from "@/libs/network/axios";
@@ -18,11 +19,7 @@ export default async function EditCategory({params} : EditCategoryProps) {
     console.log('fahmi', session?.token?.accessToken)
     const response = await axiosInstance.get(`/categories/${params.id}`);
     const category = (response.data as BaseResponse<Category>).data;
-    return <Container maxW={"auto"}>
-        <Card mt={5}>
-            <CardBody>
-                <CategoryFormComponent category={category}></CategoryFormComponent>
-            </CardBody>
-        </Card>
-    </Container>
+    return <ContainerCard>
+        <CategoryFormComponent category={category}></CategoryFormComponent>
+    </ContainerCard>
 }

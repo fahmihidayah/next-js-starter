@@ -7,14 +7,11 @@ import { getServerSession } from "next-auth";
 import zodToJsonSchema, { JsonSchema7Type } from "zod-to-json-schema";
 import { format } from "prettier";
 import { z } from "zod";
+import ContainerCard from "@/components/admin/Container-Card";
 
 
 export default async function CreateCategory() {
-    return <Container maxW={"auto"}>
-        <Card mt={5}>
-            <CardBody>
-                <CategoryFormComponent ></CategoryFormComponent>
-            </CardBody>
-        </Card>
-    </Container>
+    return <ContainerCard>
+         <CategoryFormComponent ></CategoryFormComponent>
+    </ContainerCard>
 }

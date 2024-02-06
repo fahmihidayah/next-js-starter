@@ -1,3 +1,4 @@
+import ContainerCard from "@/components/admin/Container-Card";
 import SimpleTable from "@/components/table/SimpleTable"
 import { Category } from "@/features/categories/data/types";
 import CategoryTable from "@/features/categories/table/CategoryTable";
@@ -22,24 +23,18 @@ interface ListCategoriesProps {
 }
 
 export default async function ListCategories({ }: ListCategoriesProps) {
-    const response = await query<Category[]>({baseUrl : "/categories"})
+    const response = await query<Category[]>({ baseUrl: "/categories" })
 
-    return <Container maxW={"auto"} mt={5}>
-        <Card>
-            <CardBody>
-                <Flex justifyContent={"space-between"}>
-                    <Heading size={"md"} mb={4} >
-                        Categories
-                    </Heading>
-                    <Link href={routePathUtils.admin().categories("create")}>
-                        <Button size={"sm"} colorScheme="blue">Create</Button>
-                    </Link>
-                </Flex>
-                <CategoryTable data={response.data ?? []}></CategoryTable>
-
-            </CardBody>
-        </Card>
-
-    </Container>
+    return <ContainerCard>
+        <Flex justifyContent={"space-between"}>
+            <Heading size={"md"} mb={4} >
+                Categories
+            </Heading>
+            <Link href={routePathUtils.admin().categories("create")}>
+                <Button size={"sm"} colorScheme="blue">Create</Button>
+            </Link>
+        </Flex>
+        <CategoryTable data={response.data ?? []}></CategoryTable>
+    </ContainerCard>
 
 }

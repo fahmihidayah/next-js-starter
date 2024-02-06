@@ -7,6 +7,7 @@ import { Card, CardBody, Container } from "@chakra-ui/react";
 import { getServerSession } from "next-auth";
 import { z } from "zod";
 import { Category } from "@/features/categories/data/types";
+import ContainerCard from "@/components/admin/Container-Card";
 
 interface EditCategoryProps {
     params : {
@@ -19,5 +20,7 @@ export default async function CategoryDelete({params} : EditCategoryProps) {
     console.log('fahmi', session?.token?.accessToken)
     const response = await axiosInstance.get(`/categories/${params.id}`);
     const category = (response.data as BaseResponse<Category>).data;
-    return <CategoryDeleteFormComponent category={category}></CategoryDeleteFormComponent>
+    return <ContainerCard>
+        <CategoryDeleteFormComponent category={category}></CategoryDeleteFormComponent>
+    </ContainerCard>
 }

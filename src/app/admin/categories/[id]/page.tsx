@@ -1,4 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import ContainerCard from "@/components/admin/Container-Card";
 import { Category } from "@/features/categories/data/types";
 import CategoryDetailComponent from "@/features/categories/form/CategoryDetailComponent";
 import { query } from "@/libs/action/query";
@@ -19,21 +20,16 @@ interface CategoryDetailProps {
 export default async function CategoryDetail({ params }: CategoryDetailProps) {
 
     const response = await query<Category>({
-        baseUrl : "/categories",
-        id : params.id
+        baseUrl: "/categories",
+        id: params.id
     })
 
     const category = response.data
 
-    return <Container maxW={"auto"} mt={5}>
-        <Card>
-
-            <CardBody>
-                <Link href={routePathUtils.admin().categories(`${category?.id}/edit`)} >
-                    <Button size={"sm"} colorScheme="green">Edit</Button>
-                </Link>
-                <CategoryDetailComponent category={category}></CategoryDetailComponent>
-            </CardBody>
-        </Card>
-    </Container>
+    return <ContainerCard>
+        <Link href={routePathUtils.admin().categories(`${category?.id}/edit`)} >
+            <Button size={"sm"} colorScheme="green">Edit</Button>
+        </Link>
+        <CategoryDetailComponent category={category}></CategoryDetailComponent>
+    </ContainerCard>
 }

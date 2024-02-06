@@ -6,7 +6,7 @@ import { query } from "@/libs/action/query";
 export default async function PostCreate() {
 
     const categoryResponse = await query<Category[]>({
-        baseUrl : "categories"
+        baseUrl: "categories"
     });
 
     return <ContainerCard>
