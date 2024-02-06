@@ -5,7 +5,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import Image from "next/image";
 import { FiMenu } from "react-icons/fi";
 import Link from "next/link";
-import { RoutePathUtils, routePathUtils } from "@/libs/routes";
+import { routePathUtils } from "@/libs/routes";
 
 export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure()

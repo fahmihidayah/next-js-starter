@@ -14,5 +14,9 @@ export const adminPathUtils = {
 
     posts : (path? : string) => {
         return handleRelativePath(`${BASE_PATH}posts`, path);
+    },
+    
+    profile : () => {
+        return handleRelativePath(`${BASE_PATH}profile`)
     }
 }

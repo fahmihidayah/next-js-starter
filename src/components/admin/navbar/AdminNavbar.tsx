@@ -1,4 +1,10 @@
+'use client'
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { routePathUtils } from "@/libs/routes";
 import { Avatar, Box, BoxProps, Button, Flex, IconButton, Menu, MenuButton, MenuDivider, MenuItem, MenuList, useColorModeValue } from "@chakra-ui/react";
+import { getServerSession } from "next-auth";
+import { getSession, signOut } from "next-auth/react";
+import Link from "next/link";
 import { FiMenu } from "react-icons/fi";
 
 interface AdminNavbar extends BoxProps {
@@ -7,6 +13,8 @@ interface AdminNavbar extends BoxProps {
 }
 
 export default function AdminNavbar({onOpen, ... rest} : AdminNavbar) {
+    const session = getSession();
+
     return <Box bg={useColorModeValue('white', 'gray.900')} borderBottom={"1px"} borderColor={"gray.100"} px={4} {... rest}>
         <Flex h={16} alignItems={'center'} justifyContent={{
             base : 'end',
@@ -33,18 +41,26 @@ export default function AdminNavbar({onOpen, ... rest} : AdminNavbar) {
                     rounded={'full'}
                     variant={'link'}
                     cursor={'pointer'}
-                    minW={0}>
+                    minW={0}
+                    >
                     <Avatar
                         size={'sm'}
                         src={
-                            'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                            '/user.png'
                         }
                     />
                 </MenuButton>
                 <MenuList>
-                    <MenuItem>Profile</MenuItem>
+                    <Link href={routePathUtils.admin().profile()}>
+                        <MenuItem>Profile</MenuItem>
+                    </Link>
                     <MenuDivider />
-                    <MenuItem>Log Out</MenuItem>
+                    <MenuItem onClick={e => {
+                        signOut({
+                            callbackUrl : routePathUtils.auth().login(),
+                            redirect : true
+                        });
+                    }}>Log Out</MenuItem>
                 </MenuList>
             </Menu>
         </Flex>
