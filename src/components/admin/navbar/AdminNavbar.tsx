@@ -35,36 +35,38 @@ export default function AdminNavbar({onOpen, ... rest} : AdminNavbar) {
                 aria-label="open menu"
                 icon={<FiMenu />}
             />
-            <Menu>
-                <MenuButton
-                    as={Button}
-                    rounded={'full'}
-                    variant={'link'}
-                    cursor={'pointer'}
-                    minW={0}
-                    >
-                    <Avatar
-                        size={'sm'}
-                        src={
-                            '/user.png'
-                        }
-                    />
-                </MenuButton>
-                <MenuList>
-                    <Link href={routePathUtils.admin().profile()}>
-                        <MenuItem>Profile</MenuItem>
-                    </Link>
-                    <MenuDivider />
-                    <MenuItem onClick={e => {
-                        signOut({
-                            callbackUrl : routePathUtils.auth().login(),
-                            redirect : true
-                        });
-                    }}>Log Out</MenuItem>
-                </MenuList>
-            </Menu>
+            <RightMenuWithUser></RightMenuWithUser>
         </Flex>
-
-
     </Box>
+}
+
+export function RightMenuWithUser() {
+    return <Menu>
+    <MenuButton
+        as={Button}
+        rounded={'full'}
+        variant={'link'}
+        cursor={'pointer'}
+        minW={0}
+        >
+        <Avatar
+            size={'sm'}
+            src={
+                '/user.png'
+            }
+        />
+    </MenuButton>
+    <MenuList>
+        <Link href={routePathUtils.admin().profile()}>
+            <MenuItem>Profile</MenuItem>
+        </Link>
+        <MenuDivider />
+        <MenuItem onClick={e => {
+            signOut({
+                callbackUrl : routePathUtils.auth().login(),
+                redirect : true
+            });
+        }}>Log Out</MenuItem>
+    </MenuList>
+</Menu>
 }

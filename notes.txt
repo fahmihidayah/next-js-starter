@@ -1,9 +1,9 @@
 what are materials that I miss?
-1. Middleware 
+1. Middleware -> currently just log
 2. Csrf 
 3. Expire jwt token -> how to refresh.
-4. protect some route or admin or some path.
-5. Deploy to Vercel or railway.
+4. protect some route or admin or some path. -> done
+5. Deploy to Vercel or railway. 
 6. error login -> done 
 7. example CRUD pattern -> done
 8. Logout -> done
