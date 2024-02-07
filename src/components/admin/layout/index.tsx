@@ -3,15 +3,20 @@ import { Box, Drawer, DrawerContent, Flex, IconButton, useColorModeValue, useDis
 import React from "react";
 import SidebarContent from "../sidebar/SidebarContent";
 import { SidebarItem } from "../sidebar";
-import { FiMenu } from "react-icons/fi";
+import { FiBox, FiFile, FiMenu, FiMessageSquare } from "react-icons/fi";
 import AdminNavbar from "../navbar/AdminNavbar";
+import { routePathUtils } from "@/libs/routes";
+import { getMenuItems } from "./admin-menu";
+import { Session } from "next-auth";
 
 interface RootLayoutProps {
-    items: SidebarItem[];
     children: React.ReactNode;
+    session? : Session;
 }
 
-export default function AdminRootLayout({ children, items }: RootLayoutProps) {
+
+export default function AdminRootLayout({ children, session }: RootLayoutProps) {
+    const items = getMenuItems(session);
     const { isOpen, onOpen, onClose } = useDisclosure()
     return <Box  minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
         <SidebarContent minH="100vh" w={{

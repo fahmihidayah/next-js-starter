@@ -23,7 +23,7 @@ export default function LoginForm() {
             email: loginForm.email,
             password: loginForm.password,
             redirect: true,
-            callbackUrl: "",
+            callbackUrl: "/admin",
 
         }).catch((signInResponse? : SignInResponse) => {
             if(signInResponse?.error) {

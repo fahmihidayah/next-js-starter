@@ -1,7 +1,9 @@
 import LoginForm from "@/features/auth/login/LoginForm";
+import { protectLoginPage } from "@/libs/session/server-auth-protection";
 import { Card, CardBody, CardHeader, Container, Divider, Heading, Text } from "@chakra-ui/react";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+    await protectLoginPage()
     return <Container mt={"5%"} maxW={{
         base: "40%",
         md: "30%",

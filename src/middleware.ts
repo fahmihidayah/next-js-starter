@@ -8,6 +8,8 @@ import { routePathUtils } from './libs/routes';
 // This function can be marked `async` if using `await` inside
 export default async function loggingMiddleware(request: NextRequest) {
   console.log(`Received ${request.method} request to ${request.url} at ${new Date()}`);
+  const valueCookie = request.cookies;
+  // console.log('cookie', valueCookie);
   // const session = await getServerSession(authOptions);
   // console.log('middleware ', session)
   // if(!session?.token) {

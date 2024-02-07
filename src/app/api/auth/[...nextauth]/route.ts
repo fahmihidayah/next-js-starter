@@ -62,9 +62,9 @@ export const authOptions: NextAuthOptions = {
         },
 
         async session({token, user, session}) : Promise<Session> {
+            // console.log('Next auth - session', user, session)
             session.user = token.userPayload;
             session.token = token.userPayload.token;
-            // console.log('Next auth - session : ', token.userPayload);
             return session
         }
     },
